@@ -12,3 +12,10 @@ typedef struct BlockHeader {
 } BlockHeader;
 
 BlockHeader* free_list = NULL;
+
+void init_heap(){
+    free_list = (BlockHeader*)heap;
+    free_list->size = HEAP_SIZE - sizeof(BlockHeader);
+    free_list->is_free = 1;
+    free_list->next = NULL;
+}
