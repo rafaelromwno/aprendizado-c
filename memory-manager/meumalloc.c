@@ -19,3 +19,13 @@ void init_heap(){
     free_list->is_free = 1;
     free_list->next = NULL;
 }
+
+int main() {
+    
+    init_heap();
+    
+    printf("Heap inicializada com %zu bytes livres\n", free_list->size);
+    printf("Bloco livre? %s\n", free_list->is_free ? "Sim" : "Não");
+
+    return 0;
+}
