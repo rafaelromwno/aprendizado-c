@@ -39,6 +39,16 @@ void* my_malloc(size_t size){
     return NULL;
 }
 
+void my_free(void* ptr){
+
+    if (ptr == NULL) return;
+
+    BlockHeader* header = (BlockHeader*)ptr - 1;
+    header -> is_free = 1;
+
+    printf("Bloco de %zu bytes liberado com sucesso!\n", header -> size);
+}
+
 int main() {
     
     init_heap();
@@ -64,6 +74,8 @@ int main() {
         printf("Falha na alocação de 100 bytes.\n");
 
     }
+
+    my_free(ptr1);
 
     return 0;
 }
