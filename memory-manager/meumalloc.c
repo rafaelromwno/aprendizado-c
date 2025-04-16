@@ -25,7 +25,23 @@ void* my_malloc(size_t size){
 
     while (current != NULL) {
 
-        if (current -> is_free && current -> size >= size){
+        if (current -> is_free && current -> size >= size + sizeof(BlockHeader)) {
+
+            if (current -> size > size + sizeof(BlockHeader) + sizeof(BlockHeader)) {
+
+                BlockHeader* new_block = (BlockHeader*)((char*)current + sizeof(BlockHeader) + size);   
+
+                new_block -> size = current -> size - size - sizeof(BlockHeader);
+
+                new_block -> is_free = 1;
+
+                new_block -> next = current -> next;
+
+
+                current -> size = size;
+                current -> next = new_block;
+
+            }
 
             current -> is_free = 0;
 
