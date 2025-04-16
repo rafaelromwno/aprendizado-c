@@ -70,7 +70,6 @@ int main() {
 
     printf("Heap inicializada com %zu bytes livres\n", (void*)free_list->size);
 
-    // Aloca um bloco de 500 bytes
     void* ptr1 = my_malloc(500);
     if (ptr1 != NULL) {
         printf("Bloco de 500 bytes alocado com sucesso!\n");
@@ -78,7 +77,6 @@ int main() {
         printf("Falha na alocação de 500 bytes.\n");
     }
 
-    // Aloca um bloco de 300 bytes
     void* ptr2 = my_malloc(300);
     if (ptr2 != NULL) {
         printf("Bloco de 300 bytes alocado com sucesso!\n");
@@ -86,7 +84,6 @@ int main() {
         printf("Falha na alocação de 300 bytes.\n");
     }
 
-    // Tenta alocar mais um bloco de 200 bytes
     void* ptr3 = my_malloc(200);
     if (ptr3 != NULL) {
         printf("Bloco de 200 bytes alocado com sucesso!\n");
