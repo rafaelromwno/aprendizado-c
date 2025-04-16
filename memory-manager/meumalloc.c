@@ -66,32 +66,33 @@ void my_free(void* ptr){
 }
 
 int main() {
-    
     init_heap();
 
-    printf("Heap inicializada com %zu bytes livres\n", free_list->size);
+    printf("Heap inicializada com %zu bytes livres\n", (void*)free_list->size);
 
-    void* ptr1 = my_malloc(100);
-
-    if(ptr1 != NULL) {
-
-        printf("Bloco de 100 bytes alocado com sucesso!\n");
-
-        char* texto = (char*)ptr1;  
-
-        texto[0] = 'H';
-        texto[1] = 'i';
-        texto[2] = '\0';
-
-        printf("Valor armazenado: %s\n", texto);
-
+    // Aloca um bloco de 500 bytes
+    void* ptr1 = my_malloc(500);
+    if (ptr1 != NULL) {
+        printf("Bloco de 500 bytes alocado com sucesso!\n");
     } else {
-
-        printf("Falha na alocação de 100 bytes.\n");
-
+        printf("Falha na alocação de 500 bytes.\n");
     }
 
-    my_free(ptr1);
+    // Aloca um bloco de 300 bytes
+    void* ptr2 = my_malloc(300);
+    if (ptr2 != NULL) {
+        printf("Bloco de 300 bytes alocado com sucesso!\n");
+    } else {
+        printf("Falha na alocação de 300 bytes.\n");
+    }
+
+    // Tenta alocar mais um bloco de 200 bytes
+    void* ptr3 = my_malloc(200);
+    if (ptr3 != NULL) {
+        printf("Bloco de 200 bytes alocado com sucesso!\n");
+    } else {
+        printf("Falha na alocação de 200 bytes.\n");
+    }
 
     return 0;
 }
