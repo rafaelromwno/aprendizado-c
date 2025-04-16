@@ -20,12 +20,50 @@ void init_heap(){
     free_list->next = NULL;
 }
 
+void* my_malloc(size_t size){
+    BlockHeader* current = free_list;
+
+    while (current != NULL) {
+
+        if (current -> is_free && current -> size >= size){
+
+            current -> is_free = 0;
+
+            return (void*)(current + 1);
+        }
+        
+        current = current -> next;
+
+    }
+
+    return NULL;
+}
+
 int main() {
     
     init_heap();
-    
+
     printf("Heap inicializada com %zu bytes livres\n", free_list->size);
-    printf("Bloco livre? %s\n", free_list->is_free ? "Sim" : "Não");
+
+    void* ptr1 = my_malloc(100);
+
+    if(ptr1 != NULL) {
+
+        printf("Bloco de 100 bytes alocado com sucesso!\n");
+
+        char* texto = (char*)ptr1;  
+
+        texto[0] = 'H';
+        texto[1] = 'i';
+        texto[2] = '\0';
+
+        printf("Valor armazenado: %s\n", texto);
+
+    } else {
+
+        printf("Falha na alocação de 100 bytes.\n");
+
+    }
 
     return 0;
 }
